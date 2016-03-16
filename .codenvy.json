@@ -1,0 +1,135 @@
+{
+  "v": "4.0",
+  "name": "",
+  "policies": {
+    "create": "perUser"
+  },
+  "workspace": {
+    "defaultEnv": "widfly",
+    "environments": [
+      {
+        "name": "widfly",
+        "machineConfigs": [
+          {
+            "limits": {
+              "ram": 2000
+            },
+            "name": "ws-machine",
+            "type": "docker",
+            "source": {
+              "location": "http://beta.codenvy.com/api/recipe/recipeeqw0ltbpxk7ez2vn/script",
+              "type": "recipe"
+            },
+            "dev": true,
+            "links": []
+          }
+        ]
+      }
+    ],
+    "projects": [
+      {
+        "links": [],
+        "name": "web-java-wildfly",
+        "attributes": {
+          "maven.artifactId": [
+            "wildfly-helloworld"
+          ],
+          "maven.packaging": [
+            "war"
+          ],
+          "vcs.provider.name": [
+            "git"
+          ],
+          "maven.version": [
+            "10.0.0-SNAPSHOT"
+          ],
+          "contribute_branch": [
+            "master"
+          ],
+          "git.current.branch.name": [
+            "master"
+          ],
+          "contribute": [],
+          "contribute_mode": [
+            "contribute"
+          ],
+          "language": [
+            "java"
+          ],
+          "pull_request_id": [],
+          "git.repository.remotes": [
+            "https://github.com/che-samples/web-java-wildfly.git"
+          ],
+          "maven.groupId": [
+            "org.wildfly.quickstarts"
+          ]
+        },
+        "type": "maven",
+        "source": {
+          "location": "https://github.com/che-samples/web-java-wildfly.git",
+          "type": "git",
+          "parameters": {}
+        },
+        "modules": [],
+        "path": "/web-java-wildfly",
+        "problems": [],
+        "mixins": [
+          "git"
+        ]
+      }
+    ],
+    "name": "widfly",
+    "attributes": {},
+    "commands": [
+      {
+        "commandLine": "mvn -f ${current.project.path} clean install wildfly:deploy",
+        "name": "build-n-deploy",
+        "attributes": {
+          "previewUrl": "http://${server.port.8080}/wildfly-helloworld"
+        },
+        "type": "mvn"
+      },
+      {
+        "commandLine": "/home/user/wildfly-8.2.0.Final/bin/standalone.sh",
+        "name": "start-wildfly",
+        "attributes": {
+          "previewUrl": ""
+        },
+        "type": "custom"
+      },
+      {
+        "commandLine": "mvn -f ${current.project.path} wildfly:undeploy",
+        "name": "undeploy-archive",
+        "attributes": {
+          "previewUrl": ""
+        },
+        "type": "mvn"
+      }
+    ],
+    "links": []
+  },
+  "ide": {
+    "onProjectsLoaded": {
+      "actions": [
+        {
+          "properties": {
+            "file": "/web-java-wildfly/src/main/java/org/jboss/as/quickstarts/helloworld/HelloService.java"
+          },
+          "id": "openFile"
+        },
+        {
+          "properties": {
+            "name": "start-wildfly"
+          },
+          "id": "runCommand"
+        },
+        {
+          "properties": {
+            "name": "build-n-deploy"
+          },
+          "id": "runCommand"
+        }
+      ]
+    }
+  }
+}
